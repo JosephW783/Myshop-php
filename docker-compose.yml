@@ -1,0 +1,28 @@
+# consente di configurare e documentare tutte le dipendenze di servizio dell'applicazione,come altri servizi, cache, database, code...
+# successivamente con il comando "docker-compose up -d" esegue il lavoro dei comandi docker-compose build e docker-compose run cioè
+# Costruisce le immagini se non si trovano localmente e avvia i contenitori. Se le immagini sono già create, eseguirà il fork direttamente del contenitore.
+
+services:
+  php:
+    image: php:7.2-apache
+    ports:
+      - 80:80
+    networks:
+      - myshop
+    volumes:
+      - ./src:/var/ww/html/
+  mariadb:
+    image: mariadb:10.3
+    networks:
+      - myshop
+    ports:
+      - 3306:3306
+    volumes:
+      - ./data:/var/mysql/data
+    
+networks:
+  myshop
+  
+# services: 
+#  MariaDB  
+# dbeaver (app da scaricare per collegarsi sul container)

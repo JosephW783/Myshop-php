@@ -1,4 +1,5 @@
 <?php
+
 // Get all records from a database table
 function getAll($conn, $table){
     

@@ -7,6 +7,6 @@ $password = "Sandonaci94 ";
 $db_name = "myshop ";
 
 // App Info
-$host = " http://localhost:8000/ ";
+$host = " http://localhost:8080/ ";
 $folder = "Myshop-php";
 $base_path = $host . $folder;

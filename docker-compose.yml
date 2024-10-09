@@ -3,25 +3,53 @@
 # Costruisce le immagini se non si trovano localmente e avvia i contenitori. Se le immagini sono già create, eseguirà il fork direttamente del contenitore.
 
 services:
-  php:
-    image: php:7.2-apache
-    ports:
-      - 80:80
-    networks:
-      - myshop
+  app:
+    image: php:8.1-apache
+    container_name: Myshop-php
     volumes:
-      - ./src:/var/ww/html/
+     - ./app:/var/www/html
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    environment:
+      # Variabili per MySQL
+      - MYSQL_HOST=mysql
+      - MYSQL_ROOT_PASSWORD=Sandonaci94
+      - MYSQL_DATABASE=myshop
+      
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-db
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: Sandonaci94
+    ports:
+      - "3306:3306"
+        
+
   mariadb:
-    image: mariadb:10.3
-    networks:
-      - myshop
-    ports:
-      - 3306:3306
+    image: mariadb:10.5
+    container_name: mariadb-db
     volumes:
-      - ./data:/var/mysql/data
-    
+      - mariadb_data:/var/lib/mysql
+    environment:
+      - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD
+    ports:
+      - "3307:3306"
+
+volumes:
+  mysql_data:
+  mariadb_data:
+
 networks:
-  myshop
+  myshop:
+    driver: bridge
+
+# networks:
+#  myshop
   
 # services: 
 #  MariaDB  

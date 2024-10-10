@@ -12,11 +12,12 @@ services:
       - "8080:80"
     depends_on:
       - mysql
+      - mariadb
     environment:
       # Variabili per MySQL
-      - MYSQL_HOST=mysql
-      - MYSQL_ROOT_PASSWORD=Sandonaci94
-      - MYSQL_DATABASE=myshop
+      - MYSQL_HOST= mysql
+      - MYSQL_ROOT_PASSWORD= Sandonaci94
+      - MYSQL_DATABASE= myshop
       
 
   mysql:
@@ -26,17 +27,19 @@ services:
       - mysql_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: Sandonaci94
+      MYSQL_DATABASE: myshop
     ports:
       - "3306:3306"
         
 
   mariadb:
-    image: mariadb:10.5
+    image: mariadb
     container_name: mariadb-db
     volumes:
       - mariadb_data:/var/lib/mysql
     environment:
-      - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD
+       MYSQL_ROOT_PASSWORD: Sandonaci94
+       MYSQL_DATABASE: myshop
     ports:
       - "3307:3306"
 

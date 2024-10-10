@@ -1,4 +1,5 @@
 <?php
+include 'index.php';
 
 // Get all records from a database table
 function getAll($conn, $table){
@@ -10,9 +11,6 @@ function getAll($conn, $table){
 
         $records=[];
 
-        while ($row = $result->fetch_assoc()){
-            $records[]= $row;
-        }
     } 
     elseif($result){
         $records=[];

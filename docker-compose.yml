@@ -4,18 +4,18 @@
 
 services:
   app:
-    image: php:8.1-apache
+    image: php:8.3-apache
     container_name: Myshop-php
     volumes:
      - ./app:/var/www/html
     ports:
-      - "8080:80"
+      - "9080:80"
     depends_on:
       - mysql
       - mariadb
     environment:
       # Variabili per MySQL
-      - MYSQL_HOST= mysql
+      - MYSQL_HOST= localhost:8080
       - MYSQL_ROOT_PASSWORD= Sandonaci94
       - MYSQL_DATABASE= myshop
       
@@ -30,6 +30,7 @@ services:
       MYSQL_DATABASE: myshop
     ports:
       - "3306:3306"
+    
         
 
   mariadb:

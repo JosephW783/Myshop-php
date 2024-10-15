@@ -5,7 +5,7 @@
 services:
   app:
     image: php:8.3-apache
-    container_name: Myshop-php
+    container_name: myshop-php
     volumes:
      - ./app:/var/www/html
     ports:

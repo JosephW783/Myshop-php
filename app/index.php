@@ -1,41 +1,31 @@
 <?php
-// require_once '/app/Database.php';
-// include 'Database.php';
-require_once 'Database.php';
+// include 'index.php';
 
+$host = "localhost";
+$databaseName = "myshop";
+$username = "root";
+$password = "Sandonaci94";
 
+$dsn = "mysql:host = $host; dbname=$databaseName";
 
- // Get all records from a database table
- function getAll($conn, $table){
-    
-    $tables= $conn->query("SHOW TABLES")->fetchAll(PDO::FETCH_COLUMN);
-          $data = [];
+try {
+    $databaseConnection = new PDO($dsn,  $username, $password);
 
-           foreach($tables as $table){
-               $stmt = $conn->query(("SELECT * FROM $table"));
-         }
-           
+    $databaseConnection ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Connessione riuscita!";
+   // $sql = "SELECT * FROM users";
+    // $users = $databaseConnection->query($sql);
+    // foreach($users AS $user){
+      //  echo "<li>" . $user["name"] . "</li>";
 
-    $sql = "SELECT * FROM '$table'";
-    $result = $conn->query($sql);
-
-    if($result && $result->num_rows >0){
-
-       $records=[];
-
-    } 
-    elseif($result){
-       $records=[];
+    // } 
+    foreach (PDO::getAvailableDrivers() as $driver){
+        echo "<p>driver:".$driver."</p>";
     }
-    else {
-    $records = false;
+} catch (PDOException $error){
+    echo $error->getMessage();
 }
-  print_r($data);
-  //  echo'</pre>';
-    
-    //Close database connection
-   // $conn->Close();
-            
-    
-return $records;
- }
+//App Info
+// $host = " http://localhost:9080/ ";mysql 
+// $folder = "Myshop-php";
+// $base_path = $host . $folder;

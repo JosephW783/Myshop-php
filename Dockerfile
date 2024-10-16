@@ -1,18 +1,18 @@
 
 # Usa l'immagine ufficiale di PHP con Apache
-FROM php:8.3-apache
+FROM php:8.1-apache
 
-
-# Aggiorna i pacchetti e installa dipendenze necessarie
-RUN apt-get update && apt-get install -y \
+ # Aggiorna i pacchetti e installa dipendenze necessarie
+ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd
 
-# recuperare un file locale php.ini , caricarlo nella build , cancellare l'immagine vecchia e ricomporre il tutto
-COPY ./  /var/www/html
+# Installa l'estensione PDO MySQL
+RUN docker-php-ext-install pdo_mysql
+
 
 # Imposto la directory di lavoro all'interno del container
 WORKDIR /var/www/html
